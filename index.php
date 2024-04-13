@@ -544,37 +544,37 @@
                     </div>
 
                     <div class="col-lg-6 col-12">
-                        <form action="index.html" method="post" class="custom-form contact-form" role="form">
+                            <form action="mail.php" method="post" class="custom-form contact-form" role="form">
 
-                            <div class="row">
+                                <div class="row">
 
-                                <div class="col-lg-6 col-12">
-                                    <label for="name" class="form-label">Name <sup class="text-danger">*</sup></label>
+                                    <div class="col-lg-6 col-12">
+                                        <label for="name" class="form-label">Name <sup class="text-danger">*</sup></label>
 
-                                    <input type="text" name="name" id="name" class="form-control" placeholder="Jackson"
-                                        required="">
+                                        <input type="text" name="name" id="name" class="form-control" placeholder="Jackson"
+                                            required="">
+                                    </div>
+
+                                    <div class="col-lg-6 col-12">
+                                        <label for="email" class="form-label">Email Address</label>
+
+                                        <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*"
+                                            class="form-control" placeholder="Jack@gmail.com" required="">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="message" class="form-label">How can we help?</label>
+
+                                        <textarea name="message" rows="4" class="form-control" id="message"
+                                            placeholder="Message" required=""></textarea>
+
+                                    </div>
                                 </div>
 
-                                <div class="col-lg-6 col-12">
-                                    <label for="email" class="form-label">Email Address</label>
-
-                                    <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*"
-                                        class="form-control" placeholder="Jack@gmail.com" required="">
+                                <div class="col-lg-5 col-12 mx-auto mt-3">
+                                    <button type="submit" class="form-control">Send Message</button>
                                 </div>
-
-                                <div class="col-12">
-                                    <label for="message" class="form-label">How can we help?</label>
-
-                                    <textarea name="message" rows="4" class="form-control" id="message"
-                                        placeholder="Message" required=""></textarea>
-
-                                </div>
-                            </div>
-
-                            <div class="col-lg-5 col-12 mx-auto mt-3">
-                                <button type="submit" class="form-control">Send Message</button>
-                            </div>
-                        </form>
+                            </form>
                     </div>
 
                     <div class="col-lg-6 col-12 mx-auto mt-5 mt-lg-0 ps-lg-5">
@@ -675,6 +675,35 @@
                 </div>
         </footer>
     </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.custom-form').submit(function(e){
+        e.preventDefault(); // Prevent form submission
+
+        // Serialize form data
+        var formData = $(this).serialize();
+
+        // Send AJAX request
+        $.ajax({
+            url: 'send_email.php', // URL of the PHP file
+            type: 'POST',
+            data: formData,
+            success: function(response){
+                if(response == 'success'){
+                    alert('Email sent successfully!');
+                    // Optionally, you can redirect the user to a thank you page or clear the form fields
+                } else {
+                    alert('Failed to send email. Please try again later.');
+                }
+            }
+        });
+    });
+});
+</script>
+
+
+
 
     <!-- JAVASCRIPT FILES -->
     <script src="js/jquery.min.js"></script>
